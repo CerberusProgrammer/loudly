@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:loudly/screen/home.dart';
 
 void main() async {
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Loudly',
       theme: ThemeData(
         colorSchemeSeed: Colors.amber,
@@ -11,22 +13,4 @@ void main() async {
       home: const Home(),
     ),
   );
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _Home();
-}
-
-class _Home extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Loudly'),
-      ),
-    );
-  }
 }
