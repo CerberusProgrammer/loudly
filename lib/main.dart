@@ -7,7 +7,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       title: 'Loudly',
       theme: ThemeData(
-        colorSchemeSeed: Colors.amber,
+        colorSchemeSeed: Colors.orange,
         useMaterial3: true,
       ),
       home: const Home(),
