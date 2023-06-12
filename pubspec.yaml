@@ -13,12 +13,8 @@ dependencies:
 
   sqflite: ^2.2.8+4
   shared_preferences: ^2.1.1
-  like_button: ^2.0.5
-  fluttermoji: ^1.0.2
-  salomon_bottom_bar: ^3.3.2
   flashy_tab_bar2: ^0.0.6
   font_awesome_flutter: ^10.4.0
-  google_fonts: ^5.0.0
 
 dev_dependencies:
   flutter_test:

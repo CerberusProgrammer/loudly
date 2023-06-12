@@ -2,7 +2,7 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:loudly/screen/message.dart';
 import 'package:loudly/screen/profile.dart';
-import 'package:loudly/screen/secret.dart';
+import 'package:loudly/screen/secrets.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
