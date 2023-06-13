@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:loudly/widget/create_secret.dart';
 
+import '../model/secret.dart';
 import '../widget/display_secret.dart';
+
+List<Secret> secrets = [
+  Secret(content: 'ksjdd', fontSize: 50),
+  Secret(content: 'ksjdd', backgroundColor: Colors.purple, fontSize: 40),
+  Secret(content: 'ksjdd', backgroundColor: Colors.pink, fontSize: 40),
+  Secret(content: 'ksjdd', backgroundColor: Colors.indigo, fontSize: 32)
+];
 
 class SecretScreen extends StatefulWidget {
   const SecretScreen({super.key});
@@ -11,7 +19,7 @@ class SecretScreen extends StatefulWidget {
   State<SecretScreen> createState() => _SecretScreenState();
 }
 
-class _SecretScreenState extends State<SecretScreen> {
+class _SecretScreenState extends State<SecretScreen> with ChangeNotifier {
   late ScrollController _hideButtonController;
 
   late bool _isVisible;
@@ -51,7 +59,7 @@ class _SecretScreenState extends State<SecretScreen> {
           controller: _hideButtonController,
           crossAxisCount: 2,
           childAspectRatio: 0.6,
-          children: List.generate(20, (index) {
+          children: List.generate(secrets.length, (index) {
             return Card(
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
@@ -62,11 +70,17 @@ class _SecretScreenState extends State<SecretScreen> {
                 },
                 child: Column(
                   children: [
-                    const Expanded(
+                    Expanded(
                         child: Card(
-                      color: Colors.orange,
+                      color: secrets[index].backgroundColor,
                       child: Center(
-                        child: Text('hi'),
+                        child: Text(
+                          secrets[index].content,
+                          style: TextStyle(
+                            fontSize: secrets[index].fontSize,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     )),
                     Padding(

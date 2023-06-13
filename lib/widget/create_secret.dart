@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loudly/model/secret.dart';
+import 'package:loudly/screen/secrets.dart';
 import 'package:loudly/widget/post.dart';
 
 class CreateSecret extends StatefulWidget {
@@ -213,6 +214,14 @@ class _CreateSecretState extends State<CreateSecret> {
                                     if (!isAction)
                                       IconButton(
                                         onPressed: () {
+                                          secrets.add(
+                                            Secret(
+                                              content:
+                                                  textEditingController.text,
+                                              backgroundColor: background,
+                                              fontSize: sizeText,
+                                            ),
+                                          );
                                           Navigator.pop(context);
                                           Navigator.push(context,
                                               MaterialPageRoute(
@@ -222,6 +231,7 @@ class _CreateSecretState extends State<CreateSecret> {
                                                 content:
                                                     textEditingController.text,
                                                 backgroundColor: background,
+                                                fontSize: sizeText,
                                               ),
                                             );
                                           }));
