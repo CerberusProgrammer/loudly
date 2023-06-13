@@ -69,7 +69,7 @@ class _CreateSecretState extends State<CreateSecret> {
         alignment: Alignment.bottomCenter,
         child: Container(
           height: MediaQuery.of(context).size.height / 1.04,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.background,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Card(
@@ -214,34 +214,30 @@ class _CreateSecretState extends State<CreateSecret> {
                                     if (!isAction)
                                       IconButton(
                                         onPressed: () {
-                                          secrets.add(
-                                            Secret(
-                                              content:
-                                                  textEditingController.text,
-                                              backgroundColor: background,
-                                              fontSize: sizeText,
+                                          final secret = Secret(
+                                            content: textEditingController.text,
+                                            backgroundColor: background,
+                                            fontSize: sizeText,
+                                          );
+
+                                          secrets.add(secret);
+                                          Navigator.pop(context);
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (builder) {
+                                                return PostSecret(
+                                                    secret: secret);
+                                              },
                                             ),
                                           );
-                                          Navigator.pop(context);
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (builder) {
-                                            return PostSecret(
-                                              secret: Secret(
-                                                content:
-                                                    textEditingController.text,
-                                                backgroundColor: background,
-                                                fontSize: sizeText,
-                                              ),
-                                            );
-                                          }));
                                         },
                                         icon: const Icon(
                                           Icons.upload,
                                           color: Colors.white,
                                           size: 30,
                                         ),
-                                      ),
+                                      )
                                   ],
                                 ),
                               ),
