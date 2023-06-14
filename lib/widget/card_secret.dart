@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/secret.dart';
+import '../infrastructure/model/secret.dart';
 import 'display_secret.dart';
 
 class CardSecret extends StatelessWidget {

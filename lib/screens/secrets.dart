@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:loudly/widget/card_secret.dart';
 import 'package:loudly/widget/create_secret.dart';
 
-import '../model/secret.dart';
+import '../infrastructure/model/secret.dart';
 
 List<Secret> secrets = [
   Secret(content: 'ksjdd', fontSize: 50),

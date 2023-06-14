@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loudly/model/secret.dart';
-import 'package:loudly/screen/secrets.dart';
+import 'package:loudly/infrastructure/model/secret.dart';
+import 'package:loudly/screens/secrets.dart';
 import 'package:loudly/widget/post.dart';
 
 class CreateSecret extends StatefulWidget {

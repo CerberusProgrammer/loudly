@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loudly/model/secret.dart';
+import 'package:loudly/infrastructure/model/secret.dart';
 
 class PostSecret extends StatelessWidget {
   final Secret secret;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:loudly/screen/home.dart';
+import 'package:loudly/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
