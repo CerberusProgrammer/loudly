@@ -16,6 +16,9 @@ dependencies:
   flashy_tab_bar2: ^0.0.6
   font_awesome_flutter: ^10.4.0
   adaptive_theme: ^3.3.0
+  firebase_core: ^2.14.0
+  firebase_database: ^10.2.3
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loudly/infrastructure/model/secret.dart';
-import 'package:loudly/screens/secrets.dart';
-import 'package:loudly/widget/post.dart';
+import 'package:loudly/providers/secret_provider.dart';
+import 'package:provider/provider.dart';
 
 class CreateSecret extends StatefulWidget {
   const CreateSecret({super.key});
@@ -218,26 +219,30 @@ class _CreateSecretState extends State<CreateSecret> {
                                             content: textEditingController.text,
                                             backgroundColor: background,
                                             fontSize: sizeText,
+                                            comments: [],
                                           );
 
-                                          secrets.add(secret);
+                                          final databaseReference =
+                                              FirebaseDatabase.instance.ref();
+                                          databaseReference
+                                              .child('secrets')
+                                              .push()
+                                              .set(
+                                                secret.toMap(),
+                                              );
+
+                                          context
+                                              .read<SecretProvider>()
+                                              .addSecret(secret);
+
                                           Navigator.pop(context);
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (builder) {
-                                                return PostSecret(
-                                                    secret: secret);
-                                              },
-                                            ),
-                                          );
                                         },
                                         icon: const Icon(
                                           Icons.upload,
                                           color: Colors.white,
                                           size: 30,
                                         ),
-                                      )
+                                      ),
                                   ],
                                 ),
                               ),

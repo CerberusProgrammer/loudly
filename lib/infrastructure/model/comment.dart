@@ -1,24 +1,15 @@
 class Comment {
-  String? author;
   String content;
-  int likes;
 
   Comment({
-    this.author,
     required this.content,
-    this.likes = 0,
   });
 
-  Comment.fromMap(Map<String, dynamic> map)
-      : author = map['author'],
-        content = map['content'],
-        likes = map['likes'];
+  Comment.fromMap(Map<dynamic, dynamic> map) : content = map['content'];
 
-  Map<String, dynamic> toMap() {
+  Map<dynamic, dynamic> toMap() {
     return {
-      'author': author,
       'content': content,
-      'likes': likes,
     };
   }
 }

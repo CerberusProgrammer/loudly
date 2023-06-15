@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:loudly/widget/card_secret.dart';
-import 'package:loudly/widget/create_secret.dart';
+import 'package:loudly/screens/create_secret.dart';
+import 'package:provider/provider.dart';
 
-import '../infrastructure/model/secret.dart';
-
-List<Secret> secrets = [
-  Secret(content: 'ksjdd', fontSize: 50),
-  Secret(content: 'ksjdd', backgroundColor: Colors.purple, fontSize: 40),
-  Secret(content: 'ksjdd', backgroundColor: Colors.pink, fontSize: 40),
-  Secret(content: 'ksjdd', backgroundColor: Colors.indigo, fontSize: 32)
-];
+import '../providers/secret_provider.dart';
 
 class SecretScreen extends StatefulWidget {
-  const SecretScreen({super.key});
+  const SecretScreen({Key? key}) : super(key: key);
 
   @override
-  State<SecretScreen> createState() => _SecretScreenState();
+  _SecretScreenState createState() => _SecretScreenState();
 }
 
-class _SecretScreenState extends State<SecretScreen> with ChangeNotifier {
+class _SecretScreenState extends State<SecretScreen> {
   late ScrollController _hideButtonController;
-
   late bool _isVisible;
+  late Future<void> _dataFuture;
 
   @override
   void initState() {
@@ -48,6 +42,7 @@ class _SecretScreenState extends State<SecretScreen> with ChangeNotifier {
         }
       }
     });
+    _dataFuture = context.read<SecretProvider>().syncData();
   }
 
   @override
@@ -55,13 +50,27 @@ class _SecretScreenState extends State<SecretScreen> with ChangeNotifier {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: GridView.count(
-          controller: _hideButtonController,
-          crossAxisCount: 2,
-          childAspectRatio: 0.6,
-          children: List.generate(secrets.length, (index) {
-            return CardSecret(secret: secrets[index]);
-          }),
+        child: FutureBuilder<void>(
+          future: _dataFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return RefreshIndicator(
+                onRefresh: () async {},
+                child: GridView.count(
+                  controller: _hideButtonController,
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.6,
+                  children: List.generate(
+                      context.watch<SecretProvider>().secrets.length, (index) {
+                    return CardSecret(
+                        secret: context.watch<SecretProvider>().secrets[index]);
+                  }),
+                ),
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
       floatingActionButton: AnimatedOpacity(
