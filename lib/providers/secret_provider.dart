@@ -8,7 +8,7 @@ class SecretProvider extends ChangeNotifier {
 
   void addSecret(Secret secret) {
     Secret newSecret = secret;
-    secrets.add(newSecret);
+    secrets.insert(0, newSecret);
     notifyListeners();
   }
 
@@ -16,7 +16,11 @@ class SecretProvider extends ChangeNotifier {
     DatabaseReference itemRef =
         FirebaseDatabase.instance.ref().child('secrets');
 
-    await itemRef.once().then((DatabaseEvent event) {
+    await itemRef
+        .orderByKey()
+        .limitToLast(10)
+        .once()
+        .then((DatabaseEvent event) {
       secrets.clear();
       if (event.snapshot.value is Map) {
         Map<dynamic, dynamic> values =
@@ -24,9 +28,10 @@ class SecretProvider extends ChangeNotifier {
 
         values.forEach((key, values) {
           if (values is Map<dynamic, dynamic>) {
-            secrets.add(Secret.fromMap(values));
+            secrets.add(Secret.fromMap(key, values));
           }
         });
+        secrets.sort((a, b) => b.key.compareTo(a.key));
         notifyListeners();
       }
     });

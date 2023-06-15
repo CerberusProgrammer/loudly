@@ -38,7 +38,7 @@ class CardSecret extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(
-                    Icons.remove_red_eye_sharp,
+                    Icons.thumb_up,
                     size: 30,
                     color: Theme.of(context)
                         .textTheme
@@ -47,7 +47,7 @@ class CardSecret extends StatelessWidget {
                         .withAlpha(180),
                   ),
                   Text(
-                    ' 10',
+                    ' ${secret.likes}',
                     style: TextStyle(
                       color: Theme.of(context)
                           .textTheme
@@ -68,7 +68,7 @@ class CardSecret extends StatelessWidget {
                     size: 30,
                   ),
                   Text(
-                    ' 10',
+                    ' ${secret.comments.length}',
                     style: TextStyle(
                       fontSize: 18,
                       color: Theme.of(context)

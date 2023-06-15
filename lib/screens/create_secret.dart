@@ -216,6 +216,7 @@ class _CreateSecretState extends State<CreateSecret> {
                                       IconButton(
                                         onPressed: () {
                                           final secret = Secret(
+                                            key: '',
                                             content: textEditingController.text,
                                             backgroundColor: background,
                                             fontSize: sizeText,
@@ -224,12 +225,11 @@ class _CreateSecretState extends State<CreateSecret> {
 
                                           final databaseReference =
                                               FirebaseDatabase.instance.ref();
-                                          databaseReference
+                                          final newSecretRef = databaseReference
                                               .child('secrets')
-                                              .push()
-                                              .set(
-                                                secret.toMap(),
-                                              );
+                                              .push();
+                                          secret.key = newSecretRef.key!;
+                                          newSecretRef.set(secret.toMap());
 
                                           context
                                               .read<SecretProvider>()

@@ -55,7 +55,9 @@ class _SecretScreenState extends State<SecretScreen> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return RefreshIndicator(
-                onRefresh: () async {},
+                onRefresh: () async {
+                  await context.read<SecretProvider>().syncData();
+                },
                 child: GridView.count(
                   controller: _hideButtonController,
                   crossAxisCount: 2,

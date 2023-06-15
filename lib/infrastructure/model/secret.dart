@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'comment.dart';
 
 class Secret {
+  String key;
   String content;
   double fontSize;
   String? author;
@@ -11,6 +12,7 @@ class Secret {
   List<Comment> comments;
 
   Secret({
+    required this.key,
     required this.content,
     required this.fontSize,
     this.likes = 0,
@@ -18,8 +20,9 @@ class Secret {
     required this.comments,
   });
 
-  Secret.fromMap(Map<dynamic, dynamic> map)
-      : content = map['content'],
+  Secret.fromMap(String key, Map<dynamic, dynamic> map)
+      : key = key,
+        content = map['content'],
         fontSize = (map['fontSize'] is int)
             ? (map['fontSize'] as int).toDouble()
             : map['fontSize'] as double,
