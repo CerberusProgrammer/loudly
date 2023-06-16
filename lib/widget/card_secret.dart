@@ -15,7 +15,9 @@ class CardSecret extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (builder) {
-            return const DisplaySecret();
+            return DisplaySecret(
+              secret: secret,
+            );
           }));
         },
         child: Column(

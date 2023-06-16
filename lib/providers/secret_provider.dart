@@ -18,7 +18,7 @@ class SecretProvider extends ChangeNotifier {
 
     await itemRef
         .orderByKey()
-        .limitToLast(10)
+        .limitToLast(50)
         .once()
         .then((DatabaseEvent event) {
       secrets.clear();

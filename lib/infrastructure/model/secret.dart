@@ -15,18 +15,18 @@ class Secret {
     required this.key,
     required this.content,
     required this.fontSize,
+    this.author,
     this.likes = 0,
     this.backgroundColor = Colors.orange,
     required this.comments,
   });
 
-  Secret.fromMap(String key, Map<dynamic, dynamic> map)
-      : key = key,
-        content = map['content'],
+  Secret.fromMap(this.key, Map<dynamic, dynamic> map)
+      : content = map['content'],
         fontSize = (map['fontSize'] is int)
             ? (map['fontSize'] as int).toDouble()
             : map['fontSize'] as double,
-        author = map['author'],
+        author = map['author'] ?? 'Anonymous',
         backgroundColor = map['backgroundColor'] != null
             ? Color(map['backgroundColor'])
             : null,
