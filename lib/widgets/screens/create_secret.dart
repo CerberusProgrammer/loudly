@@ -1,8 +1,7 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loudly/infrastructure/model/secret.dart';
-import 'package:loudly/providers/secret_provider.dart';
+import 'package:loudly/widgets/providers/secret_provider.dart';
 import 'package:provider/provider.dart';
 
 class CreateSecret extends StatefulWidget {
@@ -216,25 +215,16 @@ class _CreateSecretState extends State<CreateSecret> {
                                       IconButton(
                                         onPressed: () {
                                           final secret = Secret(
-                                            key: '',
+                                            key: '0',
                                             content: textEditingController.text,
                                             backgroundColor: background,
                                             fontSize: sizeText,
-                                            comments: [],
+                                            createdAt: DateTime.now(),
                                           );
-
-                                          final databaseReference =
-                                              FirebaseDatabase.instance.ref();
-                                          final newSecretRef = databaseReference
-                                              .child('secrets')
-                                              .push();
-                                          secret.key = newSecretRef.key!;
-                                          newSecretRef.set(secret.toMap());
 
                                           context
                                               .read<SecretProvider>()
-                                              .addSecret(secret);
-
+                                              .uploadSecret(secret);
                                           Navigator.pop(context);
                                         },
                                         icon: const Icon(

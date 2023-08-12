@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../infrastructure/model/secret.dart';
+import '../../infrastructure/model/secret.dart';
 import 'display_secret.dart';
 
 class CardSecret extends StatelessWidget {
@@ -68,17 +68,6 @@ class CardSecret extends StatelessWidget {
                         .color!
                         .withAlpha(180),
                     size: 30,
-                  ),
-                  Text(
-                    ' ${secret.comments.length}',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .color!
-                          .withAlpha(180),
-                    ),
                   ),
                 ],
               ),

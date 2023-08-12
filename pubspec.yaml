@@ -8,6 +8,10 @@ environment:
   sdk: '>=2.19.5 <3.0.0'
 
 dependencies:
+  firebase_auth: ^4.7.2
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.4
+
   flutter:
     sdk: flutter
 
@@ -15,9 +19,6 @@ dependencies:
   shared_preferences: ^2.1.1
   flashy_tab_bar2: ^0.0.6
   font_awesome_flutter: ^10.4.0
-  adaptive_theme: ^3.3.0
-  firebase_core: ^2.14.0
-  firebase_database: ^10.2.3
   provider: ^6.0.5
   like_button: ^2.0.5
 

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:loudly/widget/card_secret.dart';
-import 'package:loudly/screens/create_secret.dart';
+import 'package:loudly/widgets/shared/card_secret.dart';
+import 'package:loudly/widgets/screens/create_secret.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/secret_provider.dart';
 
-class SecretScreen extends StatefulWidget {
-  const SecretScreen({Key? key}) : super(key: key);
+class SecretListScreen extends StatefulWidget {
+  const SecretListScreen({Key? key}) : super(key: key);
 
   @override
-  State<SecretScreen> createState() => _SecretScreenState();
+  State<SecretListScreen> createState() => _SecretListScreenState();
 }
 
-class _SecretScreenState extends State<SecretScreen> {
+class _SecretListScreenState extends State<SecretListScreen> {
   late ScrollController _hideButtonController;
   late bool _isVisible;
   late Future<void> _dataFuture;

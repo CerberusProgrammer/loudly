@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
-import '../infrastructure/model/secret.dart';
+import '../../infrastructure/model/secret.dart';
 
 class DisplaySecret extends StatelessWidget {
   final Secret secret;

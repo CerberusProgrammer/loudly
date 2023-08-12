@@ -1,48 +1,54 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import 'comment.dart';
 
 class Secret {
   String key;
   String content;
   double fontSize;
   String? author;
+  String? authorUid;
   Color? backgroundColor;
   int likes;
-  List<Comment> comments;
+  DateTime createdAt;
 
   Secret({
     required this.key,
     required this.content,
     required this.fontSize,
     this.author,
+    this.authorUid,
     this.likes = 0,
     this.backgroundColor = Colors.orange,
-    required this.comments,
+    required this.createdAt,
   });
 
-  Secret.fromMap(this.key, Map<dynamic, dynamic> map)
+  Secret.fromJSON(this.key, Map<dynamic, dynamic> map)
       : content = map['content'],
         fontSize = (map['fontSize'] is int)
             ? (map['fontSize'] as int).toDouble()
             : map['fontSize'] as double,
         author = map['author'] ?? 'Anonymous',
+        authorUid = map['authorUid'],
         backgroundColor = map['backgroundColor'] != null
-            ? Color(map['backgroundColor'])
+            ? Color(
+                int.parse(
+                  map['backgroundColor'],
+                  radix: 16,
+                ),
+              )
             : null,
         likes = map['likes'],
-        comments = (map['comments'] != null)
-            ? List<Comment>.from(map['comments'].map((x) => Comment.fromMap(x)))
-            : [];
+        createdAt = (map['createdAt'] as Timestamp).toDate();
 
-  Map<dynamic, dynamic> toMap() {
+  Map<dynamic, dynamic> toJSON() {
     return {
       'content': content,
       'fontSize': fontSize,
       'author': author,
+      'authorUid': authorUid,
       'backgroundColor': backgroundColor?.value,
       'likes': likes,
-      'comments': comments.map((comment) => comment.toMap()).toList(),
+      'createdAt': createdAt.millisecondsSinceEpoch,
     };
   }
 }

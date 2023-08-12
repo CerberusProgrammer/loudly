@@ -1,21 +1,21 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
-import 'package:loudly/screens/message.dart';
-import 'package:loudly/screens/profile.dart';
-import 'package:loudly/screens/secrets.dart';
+import 'package:loudly/widgets/screens/message_screen.dart';
+import 'package:loudly/widgets/screens/profile_screen.dart';
+import 'package:loudly/widgets/screens/secrets_list_screen.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<Home> createState() => _Home();
+  State<HomeScreen> createState() => _Home();
 }
 
-class _Home extends State<Home> with SingleTickerProviderStateMixin {
+class _Home extends State<HomeScreen> with SingleTickerProviderStateMixin {
   int _currentIndex = 0;
 
   List<Widget> pages = const [
-    SecretScreen(),
+    SecretListScreen(),
     MessagesScreen(),
     ProfileScreen(),
   ];
