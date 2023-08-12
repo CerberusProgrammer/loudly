@@ -7,6 +7,14 @@ class CustomUser {
   final int posts;
   final int comments;
 
+  CustomUser(
+    this.user, {
+    required this.username,
+    required this.likes,
+    required this.posts,
+    required this.comments,
+  });
+
   /// This constructor is for users that doesn't want to
   /// add data, just want to go fast in the app.
   CustomUser.anonymous(

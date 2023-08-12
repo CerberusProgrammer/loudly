@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Secret {
-  String key;
   String content;
   double fontSize;
   String? author;
@@ -12,7 +11,6 @@ class Secret {
   DateTime createdAt;
 
   Secret({
-    required this.key,
     required this.content,
     required this.fontSize,
     this.author,
@@ -22,7 +20,7 @@ class Secret {
     required this.createdAt,
   });
 
-  Secret.fromJSON(this.key, Map<dynamic, dynamic> map)
+  Secret.fromJSON(Map<dynamic, dynamic> map)
       : content = map['content'],
         fontSize = (map['fontSize'] is int)
             ? (map['fontSize'] as int).toDouble()
@@ -40,7 +38,7 @@ class Secret {
         likes = map['likes'],
         createdAt = (map['createdAt'] as Timestamp).toDate();
 
-  Map<dynamic, dynamic> toJSON() {
+  Map<String, dynamic> toJSON() {
     return {
       'content': content,
       'fontSize': fontSize,

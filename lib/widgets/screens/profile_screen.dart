@@ -12,25 +12,25 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 200,
             child: Card(
               child: Row(
                 children: [
-                  Text(context.watch<LoginProvider>().userNow.user.email!),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(context.watch<LoginProvider>().userNow.username),
+                      Text(
+                          'Likes: ${context.watch<LoginProvider>().userNow.likes}'),
+                      Text(
+                          'Comments: ${context.watch<LoginProvider>().userNow.comments}'),
+                      Text(
+                          'Posts: ${context.watch<LoginProvider>().userNow.posts}'),
+                    ],
+                  ),
                 ],
               ),
             ),
           ),
-          ListTile(
-            title: const Text(
-              'Dark Theme',
-              style: TextStyle(),
-            ),
-            trailing: Switch(
-              onChanged: (bool value) {},
-              value: true,
-            ),
-          )
         ],
       ),
     );

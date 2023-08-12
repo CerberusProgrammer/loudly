@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loudly/infrastructure/model/secret.dart';
+import 'package:loudly/widgets/providers/login_provider.dart';
 import 'package:loudly/widgets/providers/secret_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -214,17 +214,17 @@ class _CreateSecretState extends State<CreateSecret> {
                                     if (!isAction)
                                       IconButton(
                                         onPressed: () {
-                                          final secret = Secret(
-                                            key: '0',
-                                            content: textEditingController.text,
-                                            backgroundColor: background,
-                                            fontSize: sizeText,
-                                            createdAt: DateTime.now(),
-                                          );
-
                                           context
                                               .read<SecretProvider>()
-                                              .uploadSecret(secret);
+                                              .uploadSecret(
+                                                user: context
+                                                    .read<LoginProvider>()
+                                                    .userNow,
+                                                color: background,
+                                                content:
+                                                    textEditingController.text,
+                                                fontSize: sizeText,
+                                              );
                                           Navigator.pop(context);
                                         },
                                         icon: const Icon(

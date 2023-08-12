@@ -1,12 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:loudly/config/app_theme.dart';
 import 'package:loudly/firebase_options.dart';
 import 'package:loudly/widgets/providers/login_provider.dart';
 import 'package:loudly/widgets/providers/secret_provider.dart';
-import 'package:loudly/widgets/screens/home_screen.dart';
-import 'package:loudly/widgets/screens/login_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:loudly/widgets/screens/login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,9 @@ void main() async {
 }
 
 class Main extends StatelessWidget {
-  const Main({super.key});
+  const Main({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +28,15 @@ class Main extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) {
             final secretProvider = SecretProvider();
-            secretProvider.syncData();
+            SecretProvider().syncData();
             return secretProvider;
           },
         ),
         ChangeNotifierProvider(
-          create: (_) => LoginProvider(),
+          create: (_) {
+            final loginProvider = LoginProvider();
+            return loginProvider;
+          },
         ),
       ],
       child: MaterialApp(

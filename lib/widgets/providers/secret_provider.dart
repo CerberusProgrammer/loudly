@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loudly/infrastructure/model/custom_user.dart';
 
 import '../../infrastructure/model/secret.dart';
 
@@ -23,28 +24,40 @@ class SecretProvider extends ChangeNotifier {
 
     // Convertir los documentos obtenidos en una lista de objetos Secret
     secrets = querySnapshot.docs.map((doc) {
-      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      Map<dynamic, dynamic> map = Map<dynamic, dynamic>.from(data);
-      return Secret.fromJSON(doc.id, map);
+      Map<dynamic, dynamic> data = doc.data() as Map<dynamic, dynamic>;
+      Map<String, dynamic> map = Map<String, dynamic>.from(data);
+      return Secret.fromJSON(map);
     }).toList();
 
     // Notificar a los listeners que los datos han cambiado
     notifyListeners();
   }
 
-  Future<void> uploadSecret(Secret secret) async {
-    // Obtener una referencia a la colección de Secrets
+  Future<void> uploadSecret({
+    required String content,
+    required double fontSize,
+    required Color color,
+    required CustomUser user,
+  }) async {
+    Secret secret = Secret(
+      content: content,
+      createdAt: DateTime.now(),
+      fontSize: fontSize,
+      likes: 0,
+      author: user.username,
+      authorUid: user.user.uid,
+      backgroundColor: color,
+    );
+
     CollectionReference secretsRef =
         FirebaseFirestore.instance.collection('secrets');
 
-    // Crear un nuevo documento Secret en Firestore
-    DocumentReference secretRef = await secretsRef.add(secret.toJSON());
-
-    // Obtener la clave del documento Secret creado
-    String secretKey = secretRef.id;
-
-    // Actualizar la clave del objeto Secret
-    secret.key = secretKey;
+    try {
+      await secretsRef.add(secret.toJSON());
+    } catch (e) {
+      print('no error');
+      print(e);
+    }
 
     // Agregar el objeto Secret a la lista de secrets
     addSecret(secret);

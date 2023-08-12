@@ -8,63 +8,59 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: Column(
+      body: const Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Spacer(),
           Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: 64,
               vertical: 16,
             ),
-            child: _InputFormField(
-              emailController: emailController,
-              passwordController: passwordController,
-            ),
+            child: _InputFormField(),
           ),
-          Text(context.watch<LoginProvider>().status),
-          FilledButton(
-            onPressed: () {
-              context.read<LoginProvider>().loginAccount(
-                    emailController.text,
-                    passwordController.text,
-                  );
-
-              if (context.read<LoginProvider>().successfulLogin) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
-              }
-            },
-            child: const Text('Login'),
-          ),
+          Spacer(),
+          _Register()
         ],
       ),
     );
   }
 }
 
-class _InputFormField extends StatelessWidget {
-  const _InputFormField({
-    required this.emailController,
-    required this.passwordController,
-  });
-
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
+class _Register extends StatelessWidget {
+  const _Register();
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text('Don’t have an account?'),
+        TextButton(
+          onPressed: () {},
+          child: const Text('Register'),
+        ),
+      ],
+    );
+  }
+}
+
+class _InputFormField extends StatelessWidget {
+  const _InputFormField();
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
     final textfieldEmailDecoration = InputDecoration(
       hintText: 'Email',
+      hintStyle: TextStyle(color: Colors.black.withOpacity(0.4)),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide.none,
@@ -73,6 +69,7 @@ class _InputFormField extends StatelessWidget {
     );
     final textfieldPasswordDecoration = InputDecoration(
       hintText: 'Password',
+      hintStyle: TextStyle(color: Colors.black.withOpacity(0.4)),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: BorderSide.none,
@@ -93,6 +90,28 @@ class _InputFormField extends StatelessWidget {
           controller: passwordController,
           obscureText: true,
           decoration: textfieldPasswordDecoration,
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        FilledButton(
+          onPressed: () {
+            context
+                .read<LoginProvider>()
+                .loginAccount(
+                  emailController.text,
+                  passwordController.text,
+                )
+                .then((value) {
+              if (value) {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              }
+            });
+          },
+          child: const Text('Login'),
         ),
       ],
     );
