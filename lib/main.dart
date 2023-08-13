@@ -11,12 +11,7 @@ import 'package:loudly/widgets/screens/login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-<<<<<<< HEAD
   await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
-=======
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
-
->>>>>>> f5995bf9b1f90651613a434265c55edea21bec99
   runApp(const Main());
 }
 
