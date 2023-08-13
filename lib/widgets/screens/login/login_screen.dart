@@ -8,15 +8,20 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: const Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Spacer(),
+          Text(
+            'Loudly',
+            style: TextStyle(
+              color: Colors.deepPurple,
+              fontSize: 72,
+            ),
+          ),
           Spacer(),
           Padding(
             padding: EdgeInsets.symmetric(
@@ -26,7 +31,8 @@ class LoginScreen extends StatelessWidget {
             child: _InputFormField(),
           ),
           Spacer(),
-          _Register()
+          _Register(),
+          Spacer(),
         ],
       ),
     );

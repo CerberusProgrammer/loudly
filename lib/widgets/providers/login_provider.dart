@@ -79,7 +79,9 @@ class LoginProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
       } else if (e.code == 'email-already-in-use') {}
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
     return null;
   }
 

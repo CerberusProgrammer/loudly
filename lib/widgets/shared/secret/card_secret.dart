@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../infrastructure/model/secret.dart';
-import 'display_secret.dart';
+import '../../../infrastructure/model/secret.dart';
+import '../../screens/secret/display_secret_screen.dart';
 
 class CardSecret extends StatelessWidget {
   final Secret secret;
@@ -15,7 +15,7 @@ class CardSecret extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (builder) {
-            return DisplaySecret(
+            return DisplaySecretScreen(
               secret: secret,
             );
           }));
@@ -28,6 +28,7 @@ class CardSecret extends StatelessWidget {
               child: Center(
                 child: Text(
                   secret.content,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: secret.fontSize,
                     color: Colors.white,
@@ -36,12 +37,12 @@ class CardSecret extends StatelessWidget {
               ),
             )),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(
                 children: [
                   Icon(
                     Icons.thumb_up,
-                    size: 30,
+                    size: 20,
                     color: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -51,23 +52,15 @@ class CardSecret extends StatelessWidget {
                   Text(
                     ' ${secret.likes}',
                     style: TextStyle(
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .color!
-                          .withAlpha(180),
+                      color: Colors.black.withOpacity(0.6),
                       fontSize: 18,
                     ),
                   ),
                   const Spacer(),
                   Icon(
                     Icons.message,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .color!
-                        .withAlpha(180),
-                    size: 30,
+                    color: Colors.black.withOpacity(0.6),
+                    size: 20,
                   ),
                 ],
               ),

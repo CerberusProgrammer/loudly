@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,7 @@ import 'package:loudly/widgets/screens/login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.web);
 
   runApp(const Main());
 }
@@ -28,7 +27,7 @@ class Main extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) {
             final secretProvider = SecretProvider();
-            SecretProvider().syncData();
+            secretProvider.syncData();
             return secretProvider;
           },
         ),

@@ -4,15 +4,15 @@ import 'package:loudly/widgets/providers/login_provider.dart';
 import 'package:loudly/widgets/providers/secret_provider.dart';
 import 'package:provider/provider.dart';
 
-class CreateSecret extends StatefulWidget {
-  const CreateSecret({super.key});
+class CreateSecretScreen extends StatefulWidget {
+  const CreateSecretScreen({super.key});
 
   @override
-  State<CreateSecret> createState() => _CreateSecretState();
+  State<CreateSecretScreen> createState() => _CreateSecretScreenState();
 }
 
-class _CreateSecretState extends State<CreateSecret> {
-  Color background = Colors.orange;
+class _CreateSecretScreenState extends State<CreateSecretScreen> {
+  Color background = Colors.deepPurple;
   double sizeText = 24;
 
   bool actionTextSizer = false;
@@ -21,7 +21,7 @@ class _CreateSecretState extends State<CreateSecret> {
 
   List<Color> colorList = [
     Colors.pink,
-    Colors.blueGrey,
+    Colors.deepPurple,
     Colors.indigo,
     Colors.orange,
     Colors.red,
@@ -76,19 +76,7 @@ class _CreateSecretState extends State<CreateSecret> {
               color: background,
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
+                  const _AppBar(),
                   Expanded(
                     child: Stack(
                       alignment: Alignment.center,
@@ -212,26 +200,11 @@ class _CreateSecretState extends State<CreateSecret> {
                                       const SizedBox(
                                           height: 20, child: VerticalDivider()),
                                     if (!isAction)
-                                      IconButton(
-                                        onPressed: () {
-                                          context
-                                              .read<SecretProvider>()
-                                              .uploadSecret(
-                                                user: context
-                                                    .read<LoginProvider>()
-                                                    .userNow,
-                                                color: background,
-                                                content:
-                                                    textEditingController.text,
-                                                fontSize: sizeText,
-                                              );
-                                          Navigator.pop(context);
-                                        },
-                                        icon: const Icon(
-                                          Icons.upload,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ),
+                                      _UploadSecret(
+                                        background: background,
+                                        textEditingController:
+                                            textEditingController,
+                                        sizeText: sizeText,
                                       ),
                                   ],
                                 ),
@@ -248,6 +221,59 @@ class _CreateSecretState extends State<CreateSecret> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _UploadSecret extends StatelessWidget {
+  const _UploadSecret({
+    required this.background,
+    required this.textEditingController,
+    required this.sizeText,
+  });
+
+  final Color background;
+  final TextEditingController textEditingController;
+  final double sizeText;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        context.read<SecretProvider>().uploadSecret(
+              user: context.read<LoginProvider>().userNow,
+              color: background,
+              content: textEditingController.text,
+              fontSize: sizeText,
+            );
+        Navigator.pop(context);
+      },
+      icon: const Icon(
+        Icons.upload,
+        color: Colors.white,
+        size: 30,
+      ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget {
+  const _AppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.close,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 }
