@@ -14,26 +14,23 @@ class SecretProvider extends ChangeNotifier {
   }
 
   Future<void> syncData() async {
-    // Obtener una referencia a la colección de Secrets
     CollectionReference secretsRef =
         FirebaseFirestore.instance.collection('secrets');
 
-    // Realizar una consulta para obtener los últimos 50 documentos
     QuerySnapshot querySnapshot =
         await secretsRef.orderBy('createdAt', descending: true).limit(50).get();
 
-    // Convertir los documentos obtenidos en una lista de objetos Secret
     secrets = querySnapshot.docs.map((doc) {
       Map<dynamic, dynamic> data = doc.data() as Map<dynamic, dynamic>;
       Map<String, dynamic> map = Map<String, dynamic>.from(data);
+      print(map);
       return Secret.fromJSON(map);
     }).toList();
 
-    // Notificar a los listeners que los datos han cambiado
     notifyListeners();
   }
 
-  Future<void> uploadSecret({
+  Future<bool> uploadSecret({
     required String content,
     required double fontSize,
     required Color color,
@@ -55,12 +52,11 @@ class SecretProvider extends ChangeNotifier {
     try {
       await secretsRef.add(secret.toJSON());
     } catch (e) {
-      print('no error');
-      print(e);
+      return false;
     }
 
-    // Agregar el objeto Secret a la lista de secrets
     addSecret(secret);
     notifyListeners();
+    return true;
   }
 }

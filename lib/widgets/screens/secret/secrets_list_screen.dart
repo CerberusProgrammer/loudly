@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:loudly/widgets/shared/card_secret.dart';
-import 'package:loudly/widgets/screens/create_secret.dart';
+import 'package:loudly/widgets/shared/secret/card_secret.dart';
+import 'package:loudly/widgets/screens/secret/create_secret_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/secret_provider.dart';
+import '../../providers/secret_provider.dart';
 
 class SecretListScreen extends StatefulWidget {
   const SecretListScreen({Key? key}) : super(key: key);
@@ -60,7 +60,13 @@ class _SecretListScreenState extends State<SecretListScreen> {
                 },
                 child: GridView.count(
                   controller: _hideButtonController,
-                  crossAxisCount: 2,
+                  crossAxisCount: MediaQuery.of(context).size.width > 900
+                      ? 5
+                      : MediaQuery.of(context).size.width > 600
+                          ? 3
+                          : MediaQuery.of(context).size.width > 300
+                              ? 2
+                              : 1,
                   childAspectRatio: 0.6,
                   children: List.generate(
                       context.watch<SecretProvider>().secrets.length, (index) {
@@ -81,7 +87,7 @@ class _SecretListScreenState extends State<SecretListScreen> {
         child: FloatingActionButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (builder) {
-              return const CreateSecret();
+              return const CreateSecretScreen();
             }));
           },
           child: const Icon(Icons.add),

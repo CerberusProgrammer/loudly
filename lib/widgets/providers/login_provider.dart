@@ -31,6 +31,7 @@ class LoginProvider extends ChangeNotifier {
           likes: data['likes'],
           posts: data['posts'],
           comments: data['comments'],
+          chatRooms: List<String>.from(data['chatRooms']),
         );
         successfulLogin = true;
         notifyListeners();
@@ -59,6 +60,7 @@ class LoginProvider extends ChangeNotifier {
               likes: 0,
               posts: 0,
               comments: 0,
+              chatRooms: [],
             );
       userNow = customUser;
 
@@ -79,7 +81,9 @@ class LoginProvider extends ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
       } else if (e.code == 'email-already-in-use') {}
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
     return null;
   }
 
@@ -115,6 +119,7 @@ class LoginProvider extends ChangeNotifier {
         likes: data['likes'],
         posts: data['posts'],
         comments: data['comments'],
+        chatRooms: List<String>.from(data['chatRooms']),
       );
 
       userNow = customUser;

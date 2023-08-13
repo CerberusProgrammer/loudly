@@ -16,7 +16,7 @@ class Secret {
     this.author,
     this.authorUid,
     this.likes = 0,
-    this.backgroundColor = Colors.orange,
+    this.backgroundColor = Colors.purple,
     required this.createdAt,
   });
 
@@ -44,9 +44,9 @@ class Secret {
       'fontSize': fontSize,
       'author': author,
       'authorUid': authorUid,
-      'backgroundColor': backgroundColor?.value,
+      'backgroundColor': backgroundColor?.value.toString(),
       'likes': likes,
-      'createdAt': createdAt.millisecondsSinceEpoch,
+      'createdAt': Timestamp.fromDate(createdAt),
     };
   }
 }

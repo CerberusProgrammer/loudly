@@ -1,8 +1,8 @@
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
-import 'package:loudly/widgets/screens/message_screen.dart';
+import 'package:loudly/widgets/screens/chat/message_screen.dart';
 import 'package:loudly/widgets/screens/profile_screen.dart';
-import 'package:loudly/widgets/screens/secrets_list_screen.dart';
+import 'package:loudly/widgets/screens/secret/secrets_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

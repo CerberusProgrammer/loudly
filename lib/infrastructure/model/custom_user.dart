@@ -6,6 +6,7 @@ class CustomUser {
   final int likes;
   final int posts;
   final int comments;
+  final List<String> chatRooms;
 
   CustomUser(
     this.user, {
@@ -13,6 +14,7 @@ class CustomUser {
     required this.likes,
     required this.posts,
     required this.comments,
+    required this.chatRooms,
   });
 
   /// This constructor is for users that doesn't want to
@@ -23,6 +25,7 @@ class CustomUser {
     this.likes = 0,
     this.posts = 0,
     this.comments = 0,
+    this.chatRooms = const [],
   });
 
   /// Constructor for required data in the login.
@@ -32,6 +35,7 @@ class CustomUser {
     required this.likes,
     required this.posts,
     required this.comments,
+    required this.chatRooms,
   });
 
   /// Constructor for required data in the create account.
@@ -41,5 +45,6 @@ class CustomUser {
     required this.likes,
     required this.posts,
     required this.comments,
+    required this.chatRooms,
   });
 }
